@@ -63,8 +63,6 @@ while True:
     plt.scatter(X, Z)
     plt.show()
 
-    X, Z = [], []
-
     if cv2.waitKey(1) == 27:
         break
 
