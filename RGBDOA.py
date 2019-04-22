@@ -44,24 +44,26 @@ while True:
     frame = np.asanyarray(frame_aligned.get_data())
     # get reference Depth state
     depth = np.asanyarray(depth_aligned.get_data())
+    print(depth.shape)
 
-    # Init local occupancy map (2.5D)
-    X, Z, GE = [], [], []
+    # Init point cloud in cartesian (2D)
+    pcc = np.zeros((640,2))
+    # Init point cloud in polar value
+    pcp = np.zeros((640,2))
 
     # 2D middle obstacle
     for u in range(640):
         z_val = depth[240-1, u]
         x_val = (u-cx)*((z_val*depth_scale)/fx)
-        Z.append(z_val)
-        X.append(x_val)
+        pcc[u, 1] = z_val
+        pcc[u, 0] = x_val
 
-    # 2D ground elevation
-    for v in range(480-1, 240-1):
-        e_val = depth[v, 320-1]
-        GE.append(e_val)
+    for v in range(640):
+        r_val = np.sqrt(pcc[u,0]**2 + pcc[u,1])
+        theta_val = np.degrees(np.arctan2(pcc[u,1], pcc[u,0]))
+        pcp[u,1] = r_val
+        pcp[u,0] = theta_val
 
-    plt.scatter(X, Z)
-    plt.show()
 
     if cv2.waitKey(1) == 27:
         break
