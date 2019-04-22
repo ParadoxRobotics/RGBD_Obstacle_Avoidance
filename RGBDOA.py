@@ -58,7 +58,7 @@ while True:
         pcc[u, 1] = z_val
         pcc[u, 0] = x_val
 
-    for v in range(640):
+    for u in range(640):
         r_val = np.sqrt(pcc[u,0]**2 + pcc[u,1])
         theta_val = np.degrees(np.arctan2(pcc[u,1], pcc[u,0]))
         pcp[u,1] = r_val
