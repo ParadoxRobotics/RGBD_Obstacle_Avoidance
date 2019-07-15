@@ -79,6 +79,7 @@ while True:
         PSC[j,1] = r
 
     # polar histogram + bubble OA 
+    # TODO
 
     if cv2.waitKey(1) == 27:
         break
